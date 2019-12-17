@@ -1,0 +1,2 @@
+# KURS-OTOMASYONU
+Web sitesi Asp.net MVC tarafında kurs otomasyonu yönetim paneli olarak geliştirildi. Siteye yönetici ve eğitmen erişim sağlayabiliyor. Uygulamada eğitmen,kursiyer,kategori ve eğitim ekleme düzenleme ile beraber kursiyerlerin ödemeleri taksitlendirildi.Eğitmenlerin yoklama alması için bir sayfa geliştirildi.Eğitmenlerin maaş bilgileri tutuldu.Her bir kursiyer ve eğitmen için hesap hareket dökümü oluşturuldu.Projede yetkilendirme sayesinde yönetici her sayfaya erişebilirken, eğitmen sadece yoklama alma sayfasına erişim sağlayabiliyor.
