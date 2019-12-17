@@ -1,0 +1,137 @@
+﻿@using KURSOTOMASYON.Models
+@model ON_KAYIT
+
+@{
+    //controller dan gelen verileri kendi tiplerine dönüştürüyoruz.
+    List<KATILMA_DURUMU> katilmadurumu = ViewData["katilmadurumu"] as List<KATILMA_DURUMU>;
+    List<EGITIM_GRUP> egitimgrupadlari = ViewData["egitimgrupadlari"] as List<EGITIM_GRUP>;
+}
+
+<style>
+    .input-validation-error {
+        border-color: red;
+    }
+</style>
+
+<div class="panel panel-default">
+    <div id="title">
+        ÖN KAYIT OLUŞTURMA/GÜNCELLEME SAYFASI
+    </div>
+    <div class="panel panel-body">
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ON_KAYIT_REFNO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ON_KAYIT_REFNO, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.ON_KAYIT_REFNO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="EGITIM_GRUP_REFNO">EGITIM_GRUP_ADI</label>
+                    <div class="col-md-10">
+                        <select name="EGITIM_GRUP_REFNO" id="EGITIM_GRUP_REFNO" class="form-control">
+                            @foreach (var k in egitimgrupadlari)
+                            {
+                                if (Model.EGITIM_GRUP_REFNO == k.EGITIM_GRUP_REFNO)
+                                {
+                                    <option selected value="@k.EGITIM_GRUP_REFNO">@k.EGITIM_GRUP_ADI</option>
+                                }
+                                else
+                                {
+                                    <option value="@k.EGITIM_GRUP_REFNO">@k.EGITIM_GRUP_ADI</option>
+                                }
+
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ADI_SOYADI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ADI_SOYADI, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ADI_SOYADI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class=" form-group">
+                    @Html.LabelFor(model => model.TELEFON, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TELEFON, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TELEFON, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class=" form-group">
+                    @Html.LabelFor(model => model.ADRES, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ADRES, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ADRES, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class=" form-group">
+                    @Html.LabelFor(model => model.EMAIL, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ACIKLAMA, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ACIKLAMA, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ACIKLAMA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GORUSME_TARIHI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GORUSME_TARIHI, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GORUSME_TARIHI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.KATILMA_DURUMU.KATILMA_DURUMU_REFNO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select name="KATILMA_DURUMU_REFNO" id="KATILMA_DURUMU_REFNO" class="form-control">
+                            @foreach (var k in katilmadurumu)
+                            {
+                                if (Model.KATILMA_DURUMU_REFNO == k.KATILMA_DURUMU_REFNO)
+                                {
+                                    <option selected value="@k.KATILMA_DURUMU_REFNO">@k.KATILMA_DURUMU1</option>
+                                }
+                                else
+                                {
+                                    <option value="@k.KATILMA_DURUMU_REFNO">@k.KATILMA_DURUMU1</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Kaydet" class="btn btn-success" />
+                        <a class="btn btn-info" href="/OnKayitlar/Index" role="button">Vazgeç</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

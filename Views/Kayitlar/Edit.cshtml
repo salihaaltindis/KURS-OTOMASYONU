@@ -1,0 +1,137 @@
+﻿@using KURSOTOMASYON.Models
+@model KAYIT
+
+@{
+    List<KURSIYER> kursiyer = ViewData["kursiyer"] as List<KURSIYER>;
+    List<EGITIM_GRUP> egitimgrup = ViewData["egitimgrup"] as List<EGITIM_GRUP>;
+}
+
+<div class="panel panel-default">
+    <div id="title">
+        KAYIT EKLEME/GÜNCELLEME SAYFASI
+    </div>
+
+    <div class="panel panel-body">
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.KAYIT_REFNO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.KAYIT_REFNO, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.KAYIT_REFNO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EGITIM_GRUP.EGITIM_GRUP_ADI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select name="EGITIM_GRUP_REFNO" id="EGITIM_GRUP_REFNO" class="form-control">
+                            @foreach (var k in egitimgrup)
+                            {
+                                if (Model.EGITIM_GRUP_REFNO == k.EGITIM_GRUP_REFNO)
+                                {
+                                    <option selected value="@k.EGITIM_GRUP_REFNO">@k.EGITIM_GRUP_ADI</option>
+                                }
+                                else
+                                {
+                                    <option value="@k.EGITIM_GRUP_REFNO">@k.EGITIM_GRUP_ADI</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.KURSIYER.KURSIYER_REFNO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select name="KURSIYER_REFNO" id="KURSIYER_REFNO" class="form-control">
+                            @foreach (var k in kursiyer)
+                            {
+                                if (Model.KURSIYER_REFNO == k.KURSIYER_REFNO)
+                                {
+                                    <option selected value="@k.KURSIYER_REFNO">@k.ADI_SOYADI</option>
+                                }
+                                else
+                                {
+                                    <option value="@k.KURSIYER_REFNO">@k.ADI_SOYADI</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ACIKLAMA, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ACIKLAMA, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ACIKLAMA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="KAYIT_DURUMU">KAYIT DURUMU</label>
+                    <div class="col-md-10">
+                        <select name="KAYIT_DURUMU" id="KAYIT_DURUMU" class="form-control">
+                            @if (Model.KAYIT_DURUMU == true)
+                            {
+                                <option selected value="true">Aktif</option>
+                                <option value="false">Pasif</option>
+                            }
+                            else
+                            {
+                                <option value="true">Aktif</option>
+                                <option selected value="false">Pasif</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.KAYIT_UCRETI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.KAYIT_UCRETI, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.KAYIT_UCRETI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TAKSIT_SAYISI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TAKSIT_SAYISI, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TAKSIT_SAYISI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    <label name="BASLANGICTARIH" class="control-label col-md-2">Taksit Başlangıç Tarih</label>
+
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" name="PESINATBASLANGICTARIH" placeholder="Başlangıç tarihi giriniz" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label name="PESINAT" class="control-label col-md-2">Peşinat</label>
+
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" name="PESINAT" placeholder="Pesinat giriniz" />
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Kaydet" class="btn btn-success" />
+                        <a class="btn btn-info" href="/Kayitlar/Index" role="button">Vazgeç</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

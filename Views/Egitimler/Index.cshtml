@@ -1,0 +1,95 @@
+﻿@using KURSOTOMASYON.Models
+
+@model List<VW_EGITIM_KATEGORI>
+
+@{
+    ViewBag.Title = "Index";
+    string veri = ViewData["veri"].ToString();
+}
+
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+<div class="panel panel-default">
+    <div class="col-md-10" id="title">EĞİTİM SAYFASI</div>
+    <div class="col-md-2" id="title">
+        <a class="btn btn-default" href="@Url.Action("ExportToExcel","Egitimler")"><i class="fas fa-file-excel"></i>Excel Al</a>
+        <button class="btn btn-default"><i class="fas fa-file-pdf"></i> @Html.ActionLink("PDF Al", "PrintAll") </button>
+    </div>
+    <div class="panel panel-body">
+        <hr />
+        <div id="arama" class="row">
+            <form action="/Egitimler/Search" method="post">
+                <input type="text" name="txtARA" placeholder="Eğitim adı giriniz" value="@veri" />
+                <button type="submit" value="Ara" class="btn btn-secondary">Ara<span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                <span class="btn btn-secondary">
+                    <a href="/Egitimler/Create"><i class="fas fa-plus"></i></a>
+                </span>
+            </form>
+        </div>
+
+        <div id="listeler" class="row table-responsive">
+            <table class="table  table-hover">
+                <thead class="thead-light">
+                    <tr>
+
+                        <th scope="col">EĞİTİM REFNO</th>
+                        <th scope="col">EĞİTİM ADI</th>
+                        <th scope="col">KATEGORİ ADI</th>
+                        <th scope="col">İÇERİK</th>
+                        <th scope="col">ÜCRET</th>
+                        <th scope="col">SAAT</th>
+                        <th scope="col">DURUMU</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @{
+                            foreach (var urun in Model)
+                            {
+                                var myModal = "myModal" + urun.EGITIM_REFNO;
+                            <tr>
+                                <th>@urun.EGITIM_REFNO </th>
+                                <th>@urun.EGITIM_ADI </th>
+                                <th>@urun.KATEGORI_ADI</th>
+                                <th>@Html.Raw(urun.ICERIK)</th>
+                                <th>@urun.UCRET</th>
+                                <th>@urun.SAAT</th>
+                                <th>@urun.DURUMU</th>
+
+                                <th>
+                                    <a class="btn btn-success" href="/Egitimler/Create/@urun.EGITIM_REFNO"><i class="far fa-edit"></i> Düzenle</a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@myModal"
+                                            data-whatever="@urun.EGITIM_REFNO">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        Sil
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>@urun.EGITIM_ADI eğitimini silmek isteğinize emin misiniz?</h3>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                                    <a href="/Egitimler/Delete/@urun.EGITIM_REFNO" class="btn btn-danger" onclick="ConfirmDelete(@urun.EGITIM_REFNO)">Sil</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @Html.Partial("_Sayfalama")
+    </div>
+    
+

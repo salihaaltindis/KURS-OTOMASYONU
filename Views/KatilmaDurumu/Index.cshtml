@@ -1,0 +1,84 @@
+﻿@using KURSOTOMASYON.Models
+@model List<KATILMA_DURUMU>
+@{
+    ViewBag.Title = "Index";
+    string veri = ViewData["veri"].ToString();
+}
+
+
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+
+<div class="panel panel-default">
+    <div class="col-md-10" id="title">KATILMA DURUMU SAYFASI</div>
+    <div class="col-md-2" id="title">
+        <a class="btn btn-default" href="@Url.Action("ExportToExcel","KatilmaDurumu")"><i class="fas fa-file-excel"></i>Excel Al</a>
+        <button class="btn btn-default"><i class="fas fa-file-pdf"></i> @Html.ActionLink("PDF Al", "PrintAll") </button>
+    </div>
+    <div class="panel panel-body">
+        <hr />
+        <div id="arama" class="row">
+            <form action="/KatilmaDurumu/Search" method="post">
+                <input type="text" name="txtARA" placeholder="Durum giriniz" value="@veri" />
+                <button type="submit" value="Ara" class="btn btn-secondary">Ara <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                <span class="btn btn-secondary">
+                    <a href="/KatilmaDurumu/Create"><i class="fas fa-plus"></i></a>
+                </span>
+            </form>
+        </div>
+
+        <div id="listeler" class="row table-responsive">
+            <table class="table  table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">KATILMA DURUMU REFNO</th>
+                        <th scope="col">KATILMA DURUMU</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                var myModal = "myModal" + item.KATILMA_DURUMU_REFNO;
+                            <tr>
+                                <th>@item.KATILMA_DURUMU_REFNO </th>
+                                <th>@item.KATILMA_DURUMU1</th>
+
+                                <th>
+                                    <a class="btn btn-success" href="/KatilmaDurumu/Create/@item.KATILMA_DURUMU_REFNO"><i class="far fa-edit"></i> Düzenle</a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@myModal"
+                                            data-whatever="@item.KATILMA_DURUMU_REFNO">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        Sil
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>@item.KATILMA_DURUMU1 durumunu silmek isteğinize emin misiniz?</h3>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+
+                                                    <a href="/KatilmaDurumu/Delete/@item.KATILMA_DURUMU_REFNO" class="btn btn-danger" onclick="ConfirmDelete(@item.KATILMA_DURUMU_REFNO)">Sil</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @Html.Partial("_Sayfalama")
+    </div>

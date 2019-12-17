@@ -1,0 +1,79 @@
+﻿@using KURSOTOMASYON.Models;
+@model List<YETKI>
+
+@{
+    ViewBag.Title = "Yetkiler";
+    List<SAYFA> sayfalar = ViewData["sayfalar"] as List<SAYFA>;
+}
+
+
+
+    <div class="panel panel-default">
+        <div id="title">YETKİLER SAYFASI</div>
+        <div class="panel panel-body">
+            <div>
+                <form method="post" action="~/YetkiGruplari/Kayit">
+                    <input name="YETKI_GRUBU_REFNO" type="hidden" value="@ViewData["id"].ToString()" />
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Sayfa Adı
+                            </th>
+                            <th>
+                                Oku
+                            </th>
+                            <th>
+                                Kaydet
+                            </th>
+                            <th>
+                                Sil
+                            </th>
+                            <th>
+                                Yeni
+                            </th>
+                            <th>
+                                Ara
+                            </th>
+                        </tr>
+
+
+                        @foreach (var item in sayfalar)
+                        {
+                            YETKI yetki = Model.Where(m => m.SAYFA_REFNO == item.SAYFA_REFNO).SingleOrDefault();
+                            if (yetki == null)
+                            {
+                                yetki = new YETKI();//hiç bu sayfaya ait yetki kaydı yoksa okuma=false; kaydet=false; sil=false, ara=false;
+                            }
+                            <tr>
+                                <td>
+                                    @item.SAYFA_ADI
+                                    <input name="SAYFA_REFNO@(@item.SAYFA_REFNO)" type="hidden" value="@item.SAYFA_REFNO" />
+
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="OKUMA@(@item.SAYFA_REFNO)" value="true" @(yetki.OKUMA == true ? "checked" : "") />
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="KAYDET@(@item.SAYFA_REFNO)" value="true" @(yetki.KAYDET == true ? "checked" : "") />
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="SIL@(@item.SAYFA_REFNO)" value="true" @(yetki.SIL == true ? "checked" : "") />
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="YENI@(@item.SAYFA_REFNO)" value="true" @(yetki.YENI == true ? "checked" : "") />
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="ARAMA@(@item.SAYFA_REFNO)" value="true" @(yetki.ARAMA == true ? "checked" : "") />
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                    <input class="btn btn-success" type="submit" value="Kaydet" />
+                    <a class="btn btn-info" href="/YetkiGruplari/Index" role="button">Vazgeç</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    

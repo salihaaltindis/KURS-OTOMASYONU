@@ -1,0 +1,49 @@
+﻿@model KURSOTOMASYON.Models.YONETICI
+
+
+    <div class="panel panel-default">
+        <div id="title">YÖNETİCİ DETAY SAYFASI</div>
+        <div class="panel panel-body">
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.YETKI_GRUBU.GRUP_ADI)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.YETKI_GRUBU.GRUP_ADI)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.YONETICI_ADI)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.YONETICI_ADI)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PAROLA)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PAROLA)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DURUMU)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DURUMU)
+                </dd>
+
+            </dl>
+        </div>
+        <button class="btn btn-outline-info" style="text-decoration-color:white">  @Html.ActionLink("Düzenleme Yap", "Edit", new { id = Model.YONETICI_REFNO })  </button>
+       
+        <a class="btn btn-info" href="/Yoneticiler/Index" role="button">Vazgeç</a>
+    </div>
+    <p>
+        
+    </p>

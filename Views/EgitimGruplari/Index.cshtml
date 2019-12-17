@@ -1,0 +1,111 @@
+﻿@using KURSOTOMASYON.Models
+@model List<VW_EGITIM_GRUP_EGITMEN_EGITIM>
+
+@{
+    ViewBag.Title = "Index";
+    string veri = ViewData["veri"].ToString();
+}
+
+
+    
+
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+<div class="panel panel-default">
+    <div class="col-md-10" id="title">EĞİTİM GRUP SAYFASI</div>
+    <div class="col-md-2" id="title">
+        <a class="btn btn-default" href="@Url.Action("ExportToExcel","EgitimGruplari")"><i class="fas fa-file-excel"></i>Excel Al</a>
+        <button class="btn btn-default"><i class="fas fa-file-pdf"></i> @Html.ActionLink("PDF Al", "PrintAll") </button>
+    </div>
+    <div class="panel panel-body">
+        <hr />
+        <div id="arama" class="row">
+            <form action="/EgitimGruplari/Search" method="post">
+                <input type="text" name="txtARA" placeholder="Eğitim Grup Adı Giriniz" value="@veri" />
+                <button type="submit" value="Ara" class="btn btn-secondary">Ara<span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                <span class="btn btn-secondary">
+                    <a href="/EgitimGruplari/Create"><i class="fas fa-plus"></i></a>
+                </span>
+            </form>
+        </div>
+
+        <div id="listeler" class="row table-responsive">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+
+                        <th scope="col">EĞİTİM GRUP REFNO</th>
+                        <th scope="col">EĞİTİM GRUP ADI</th>
+                        <th scope="col">EĞİTİM ADI</th>
+                        <th scope="col">EĞİTMEN ADI SOYADI</th>
+                        <th scope="col">ÜCRET</th>
+                        <th scope="col">BAŞLANGIÇ TARİHİ</th>
+                        <th scope="col">BİTİŞ TARİHİ</th>
+                        <th scope="col">BAŞLANGIÇ SAATİ</th>
+                        <th scope="col">BİTİŞ SAATİ</th>
+                        <th scope="col">KONTENJAN</th>
+                        <th scope="col">GÜNLER</th>
+                        <th scope="col">DOLULUK</th>
+                        <th scope="col">AYRILAN</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @{
+                            foreach (var urun in Model)
+                            {
+                                var myModal = "myModal" + urun.EGITIM_GRUP_REFNO;
+                            <tr class="@(urun.KONTENJAN > urun.DOLULUK? "green" : urun.KONTENJAN==urun.DOLULUK? "red":"blue")">
+
+                                <th>@urun.EGITIM_GRUP_REFNO </th>
+                                <th>@urun.EGITIM_GRUP_ADI </th>
+                                <th>@urun.EGITIM_ADI </th>
+                                <th>@urun.ADI_SOYADI</th>
+                                <th>@urun.UCRET</th>
+                                <th>@urun.BASLANGIC_TARIH</th>
+                                <th>@urun.BITIS_TARIH</th>
+                                <th>@urun.BASLANGIC_SAAT</th>
+                                <th>@urun.BITIS_SAAT</th>
+                                <th>@urun.KONTENJAN</th>
+                                <th>@urun.GUNLER</th>
+                                <th>@urun.DOLULUK</th>
+                                <th>@urun.AYRILAN</th>
+                                <th>
+                                    <a class="btn btn-success" href="/EgitimGruplari/Create/@urun.EGITIM_GRUP_REFNO"><i class="far fa-edit"></i> Düzenle</a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@myModal"
+                                            data-whatever="@urun.EGITIM_GRUP_REFNO">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        Sil
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>@urun.EGITIM_GRUP_ADI grubunu silmek isteğinize emin misiniz?</h3>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                                    <a href="/EgitimGruplari/Delete/@urun.EGITIM_GRUP_REFNO" class="btn btn-danger" onclick="ConfirmDelete(@urun.EGITIM_GRUP_REFNO)">Sil</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @Html.Partial("_Sayfalama")
+    </div>
+
+
+
+

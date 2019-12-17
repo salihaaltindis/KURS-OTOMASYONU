@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+    string mesaj = "";
+    if (TempData["mesaj"]!=null)
+    {
+        mesaj = TempData["mesaj"].ToString();
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <form action="/FakeLogin/Giris" method="post">
+        <div>@mesaj</div>
+        <div>
+            <label>kullanıcı adı girin</label><input type="text" name="YONETICI_ADI" id="YONETICI_ADI" />
+            <label>Parola girin</label><input type="text" name="PAROLA" id="PAROLA" />
+        </div>
+        <div>
+            <input type="submit" value="Giriş" />
+        </div>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Giriş Başarılı";
+}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link href="~/Content/GirisSayfa.css" rel="stylesheet" />
+
+
+
+<section class="login-info">
+    <div class="container">
+        <div class="row main">
+
+            <div class="main-content">
+                <div class="form-header">
+                    <h2 class="text-center ">Yönlendiriliyorsunuz... </h2>
+                </div>
+                <div class="text-success">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Giriş Başarılı.</span>
+                    <p></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    $(function () {
+        $("#footer").hide();
+        $("#sidebar").hide();
+        $("#sidebarCollapse").hide();
+
+        setTimeout(function () {
+            window.location = "/Home/Index";
+        },1000);
+    });
+</script>

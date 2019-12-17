@@ -1,0 +1,103 @@
+﻿@using KURSOTOMASYON.Models
+@model List<KATEGORI>
+
+
+@{
+    ViewBag.Title = "Index";
+    string veri = ViewData["veri"].ToString();
+    
+}
+
+
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+
+<div class="panel panel-default">
+   
+        <div class="col-md-10" id="title">KATEGORİ SAYFASI</div>
+        <div class="col-md-2" id="title">
+            <a class="btn btn-default" href="@Url.Action("ExportToExcel","Kategoriler")"><i class="fas fa-file-excel"></i>Excel Al</a>
+            <button class="btn btn-default"><i class="fas fa-file-pdf"></i> @Html.ActionLink("PDF Al", "PrintAll") </button>
+        </div>
+ 
+    
+    @*<div id="title">
+        KATEGORİ SAYFASI
+    </div>
+    <a class="btn btn-default" href="@Url.Action("ExportToExcel","Kategoriler")"><i class="fas fa-file-excel"></i>Excel Al</a>
+    <button class="btn btn-default"><i class="fas fa-file-pdf"></i> @Html.ActionLink("PDF Al", "PrintAll") </button>*@
+<div class="panel panel-body">
+    <hr />
+    <div id="arama" class="row">
+        <form action="/Kategoriler/Search" method="post">
+            <input type="text" name="txtARA" placeholder="Kategori adı giriniz" value="@veri" />
+            <button type="submit" value="Ara" class="btn btn-secondary">Ara <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            <span class="btn btn-secondary">
+                <a href="/Kategoriler/Create"><i class="fas fa-plus"></i></a>
+            </span>
+        </form>
+    </div>
+
+
+    <div id="listeler" class="row table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">KATEGORİ REFNO</th>
+                    <th scope="col">KATEORİ ADI</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            var myModal = "myModal" + item.KATEGORI_REFNO;
+                        <tr>
+                            <th>@item.KATEGORI_REFNO </th>
+                            <th>@item.KATEGORI_ADI</th>
+                            <th>
+                                <a class="btn btn-success" href="/Kategoriler/Create/@item.KATEGORI_REFNO"><i class="far fa-edit"></i> Düzenle</a>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@myModal"
+                                        data-whatever="@item.KATEGORI_REFNO">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    Sil
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog modal-sm" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3>@item.KATEGORI_ADI kategorisini silmek isteğinize emin misiniz?</h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+
+                                                <a href="/Kategoriler/Delete/@item.KATEGORI_REFNO" class="btn btn-danger" onclick="ConfirmDelete(@item.KATEGORI_REFNO)">Sil</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+        @Html.Partial("_Sayfalama")
+    </div>
+
+
+
+  
+
+    <!--WEB CONFİG-->
+    @*<compilation debug="true" targetFramework="4.7.2" />
+        <httpRuntime targetFramework="4.7.2" />*@

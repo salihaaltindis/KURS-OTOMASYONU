@@ -1,0 +1,103 @@
+﻿@using KURSOTOMASYON.Models
+@model List<VW_ONKAYIT_EGITIMGRUP_KATILMADURUMU>
+
+
+@{
+    ViewBag.Title = "Index";
+    string veri = ViewData["veri"].ToString();
+}
+
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+<div class="panel panel-default">
+    <div class="col-md-10" id="title">ÖN KAYIT SAYFASI</div>
+    <div class="col-md-2" id="title">
+        <a class="btn btn-default" href="@Url.Action("ExportToExcel","OnKayitlar")"><i class="fas fa-file-excel"></i>Excel Al</a>
+        <button class="btn btn-default"><i class="fas fa-file-pdf"></i> @Html.ActionLink("PDF Al", "PrintAll") </button>
+    </div>
+    <div class="panel panel-body">
+        <hr />
+        <div id="arama" class="row">
+            <form action="/OnKayitlar/Search" method="post">
+                <input type="text" name="txtARA" placeholder="Kişi adı soyadı giriniz" value="@veri" />
+                <button type="submit" value="Ara" class="btn btn-secondary">Ara<span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                <span class="btn btn-secondary">
+                    <a href="/OnKayitlar/Create"><i class="fas fa-plus"></i> ÖnKayıt Al</a>
+                </span>
+                <span class="btn btn-secondary">
+                    <a href="/KatilmaDurumu/Index">Katılma Durumu</a>
+                </span>
+            </form>
+        </div>
+
+        <div id="listeler" class="row table-responsive">
+            <table class="table  table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ÖN KAYIT REFNO</th>
+                        <th scope="col">EĞİTİM GRUP ADI</th>
+                        <th scope="col">ADI SOYADI</th>
+                        <th scope="col">TELEFON</th>
+                        <th scope="col">ADRES</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">AÇIKLAMA</th>
+                        <th scope="col">GÖRÜŞME TARİHİ</th>
+                        <th scope="col">KATILMA DURUMU</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @{
+                            foreach (var urun in Model)
+                            {
+                                var myModal = "myModal" + urun.ON_KAYIT_REFNO;
+                            <tr>
+
+                                <th>@urun.ON_KAYIT_REFNO </th>
+                                <th>@urun.EGITIM_GRUP_ADI</th>
+                                <th>@urun.TELEFON</th>
+                                <th>@urun.ADI_SOYADI</th>
+                                <th>@urun.ADRES</th>
+                                <th>@urun.EMAIL</th>
+                                <th>@urun.ACIKLAMA</th>
+                                <th>@urun.GORUSME_TARIHI</th>
+                                <th>@urun.KATILMA_DURUMU</th>
+                                <th>
+                                    <a class="btn btn-success" href="/OnKayitlar/Create/@urun.ON_KAYIT_REFNO"><i class="far fa-edit"></i> Düzenle</a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@myModal"
+                                            data-whatever="@urun.ON_KAYIT_REFNO">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        Sil
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>@urun.ADI_SOYADI için oluşturulan ön kaydı silmek isteğinize emin misiniz?</h3>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                                    <a href="/OnKayitlar/Delete/@urun.ON_KAYIT_REFNO" class="btn btn-danger" onclick="ConfirmDelete(@urun.ON_KAYIT_REFNO)">Sil</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @Html.Partial("_Sayfalama")
+    </div>
+
+
+
+

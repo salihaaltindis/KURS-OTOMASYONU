@@ -1,0 +1,77 @@
+﻿
+@using KURSOTOMASYON.Models
+
+@model List<VW_EGITMEN_HAREKET_EGITMEN>
+@{
+    ViewBag.Title = "Index";
+    int egitmenrefno = 0;
+    if (ViewData["id"] != null)
+    {
+        egitmenrefno = Convert.ToInt32(ViewData["id"]);
+    }
+}
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+
+<div class="panel panel-default">
+    <div id="title">KİŞİ HAREKETLERİ SAYFASI</div>
+    <div class="panel panel-body">
+        <div id="taksitodeme" class="row">
+
+            <form action="/EgitmenHareketler/OdemeYap" method="post">
+                <span class="btn btn-default">
+                    <a href="/EgitmenHareketler/Create">Yeni Hareket Oluştur</a>
+                </span>
+                <span class="btn btn-default">
+                    <a href="/Egitmenler/Index">GERİ</a>
+                </span>
+            </form>
+        </div>
+
+
+        <div id="listeler" class="row table-responsive">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+
+                        <th scope="col">Eğitmen Hareket Refno</th>
+                        <th scope="col">Eğitmen Adı Soyadı</th>
+                        <th scope="col">Eğitmen TC </th>
+                        <th scope="col">DURUM</th>
+                        <th scope="col">Tarih</th>
+                        <th scope="col">Alacak</th>
+                        <th scope="col">Odenen</th>
+                        <th scope="col">Açıklama</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @{
+                            foreach (var k in Model)
+                            {
+
+                                var myModal = "myModal" + k.EGITMEN_HAREKET_REFNO;
+                            <tr class="@(k.ALACAK > k.ODENEN? "red" : k.ALACAK==k.ODENEN? "green":"blue")">
+                                <th>@k.EGITMEN_HAREKET_REFNO</th>
+                                <th>@k.ADI_SOYADI</th>
+                                <th>@k.TC</th>
+                                <th>@k.DURUM</th>
+                                <th>@k.TARIH</th>
+                                <th>@k.ALACAK</th>
+                                <th>@k.ODENEN</th>
+                                <th>@k.ACIKLAMA</th>
+
+                                <th>
+                                    <a href="/EgitmenHareketler/Create/@k.EGITMEN_HAREKET_REFNO" class="btn btn-success">Düzenle</a>
+                                </th>
+                            </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

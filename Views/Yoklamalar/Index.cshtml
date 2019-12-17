@@ -1,0 +1,49 @@
+﻿@model List<KURSOTOMASYON.Models.EGITIM_GRUP>
+
+@{
+    ViewBag.Title = "Index";
+    string veri = ViewData["veri"].ToString();
+}
+
+
+<div class="panel panel-default">
+    <div class="col-md-10" id="title">EĞİTİM GRUPLARI - YOKLAMA ALMA SAYFASI</div>
+    <div class="col-md-2" id="title">
+        <a class="btn btn-default" href="@Url.Action("ExportToExcel","Yoklamalar")"><i class="fas fa-file-excel"></i>Excel Al</a>
+        <button class="btn btn-default"><i class="fas fa-file-pdf"></i> @Html.ActionLink("PDF Al", "PrintAll") </button>
+    </div>
+    <div class="panel panel-body">
+        <div id="arama" class="row">
+            <form action="/Yoklamalar/Search" method="post">
+                <input type="text" name="txtARA" placeholder="Eğitim grup adı giriniz" value="@veri" />
+                <button type="submit" value="Ara" class="btn btn-secondary">Ara<span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+               
+            </form>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    EĞİTİM GRUP ADI
+                </th>
+                <th>
+                    YOKLAMA AL
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.EGITIM_GRUP_ADI
+                    </td>
+                    <td>
+                        @Html.ActionLink("Yoklamalar", "Yoklamalar", new { id = item.EGITIM_GRUP_REFNO })
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>
+
+

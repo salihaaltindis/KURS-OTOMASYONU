@@ -1,0 +1,84 @@
+﻿@using KURSOTOMASYON.Models;
+@model List<YOKLAMA>
+
+@{
+    ViewBag.Title = "Yoklama Al";
+    List<KAYIT> kayitlar = ViewData["kayitlar"] as List<KAYIT>;
+    var id = Convert.ToInt32(ViewData["id"].ToString());
+    var TARIH = ViewData["TARIH"] = DateTime.Today.ToShortDateString();
+
+}
+
+<div><i class="far fa-edit"></i> <label>Yoklama Al </label><input type="text" name="TARIH" value="@TARIH" /></div>
+
+<div class="panel panel-default">
+    <div  id="title">YOKLAMA SAYFASI</div>
+   
+    <div class="panel panel-body">
+        <form method="post" action="~/Yoklamalar/Kayit">
+            <input name="EGITIM_GRUBU_REFNO" type="hidden" value="@ViewData["id"].ToString()" />
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        KURSİYER REFNO
+                    </th>
+                    <th>
+                        KURSİYER ADI SOYADI
+                    </th>
+                    <th>
+                        TC
+                    </th>
+                    <th>
+                        TARİH
+                        <!--tarih hidden olduu için sütunu gizledik-->
+                    </th>
+                    <th>
+                        DURUMU
+                    </th>
+                    <th>
+                        AÇIKLAMA
+                    </th>
+                </tr>
+
+
+                @foreach (var item in kayitlar)
+                {
+                    if (item.EGITIM_GRUP_REFNO == id)
+                    {
+                        YOKLAMA k = Model.Where(m => m.KAYIT_REFNO == item.KAYIT_REFNO).SingleOrDefault();
+                        if (k == null)
+                        {
+                            k = new YOKLAMA();//hiç bu kayda ait yoklama yoksa false;
+                        }
+                        <tr>
+                            <td>
+                                @item.KAYIT_REFNO
+
+                            </td>
+                            <td>
+                                @item.KURSIYER.ADI_SOYADI
+                            </td>
+                            <td>
+                                @item.KURSIYER.TC
+                            </td>
+                            <td>
+                                <input type="text" readonly name="TARIH@(item.KAYIT_REFNO)" value="@TARIH" />
+                            </td>
+                            <td>
+                                <input type="checkbox" name="DURUMU@(item.KAYIT_REFNO)" value="true" @(k.DURUMU == true ? "checked" : "") />
+                            </td>
+
+                            <td>
+                                <input type="text" name="ACIKLAMA@(item.KAYIT_REFNO)" value="@k.ACIKLAMA" />
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+            <input class="btn btn-outline-dark" type="submit" value="Kaydet" />
+            <a class="btn btn-outline-dark" href="/Yoklamalar/Index">GERİ</a>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,72 @@
+﻿@using KURSOTOMASYON.Models
+
+@model List<VW_KURSIYER_HAREKET_KAYIT_KURSIYER>
+@{
+    ViewBag.Title = "Index";
+    string veri = ViewData["veri"].ToString();
+
+}
+
+
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+
+<div class="panel panel-default">
+    <div class="col-md-10" id="title">KURSIYER HAREKET SAYFASI</div>
+    <div class="col-md-2" id="title">
+        <a class="btn btn-default" href="@Url.Action("ExportToExcel","Kategoriler")"><i class="fas fa-file-excel"></i>Excel Al</a>
+        <button class="btn btn-default"><i class="fas fa-file-pdf"></i> @Html.ActionLink("PDF Al", "PrintAll") </button>
+    </div>
+    <div class="panel panel-body">
+        <hr />
+        <div id="arama" class="row">
+            <form action="/KursiyerHareketler/Search" method="post">
+                <input type="text" name="txtARA" placeholder="Kursiyer adı giriniz" value="@veri" />
+                <button type="submit" value="Ara" class="btn btn-secondary">Ara <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+
+
+            </form>
+        </div>
+
+        <div id="listeler" class="row table-responsive">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">KURSİYER HAREKET REFNO</th>
+                        <th scope="col">KURSİYER ADI SOYADI</th>
+                        <th scope="col">KAYIT DURUMU</th>
+                        <th scope="col">TARİH</th>
+                        <th scope="col">BORÇ</th>
+                        <th scope="col">ÖDENEN</th>
+
+                        <th scope="col"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+
+
+                        @{
+                            foreach (var k in Model)
+                            {
+
+                                var myModal = "myModal" + k.KURSIYER_HAREKET_REFNO;
+                            <tr>
+                                <th>@k.KURSIYER_HAREKET_REFNO</th>
+                                <th>@k.ADI_SOYADI</th>
+                                <th>@k.KAYIT_DURUMU</th>
+                                <th>@k.TARIH</th>
+                                <th>@k.BORC</th>
+                                <th>@k.ODENEN</th>
+
+                            </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @Html.Partial("_Sayfalama")
+    </div>

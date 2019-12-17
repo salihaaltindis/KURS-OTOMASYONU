@@ -1,0 +1,98 @@
+﻿@using KURSOTOMASYON.Models;
+
+
+@{
+    int kursiyersayisi = Convert.ToInt32(ViewData["kursiyersayisi"]);
+    int egitmensayisi = Convert.ToInt32(ViewData["egitmensayisi"]);
+    int onkayitkisi = Convert.ToInt32(ViewData["onkayitkisi"]);
+    int totalpara = Convert.ToInt32(ViewData["totalpara"]);
+}
+
+<style>
+    
+/*#kutu1 {
+    width: 250px;
+    height:125px;
+    padding: 30px;
+    background-color: #ff6a00;
+    color:white;
+    padding: 25px;
+    margin:15px;
+}
+
+#kutu2 {
+    width: 250px;
+     height:125px;
+    padding: 30px;
+    background-color: #2ab6eb;
+    color:white;
+    padding: 25px;
+    margin:15px;
+}
+
+div p{
+      vertical-align:center;
+      text-align:center;
+}*/
+</style>
+
+
+<div style="background-color:aliceblue">
+    <hr />
+    <h1 style="text-align:center; vertical-align:central; color:black; font-size:18px; margin:10px; padding:3px;" class="text-center"> ABC AKADEMİ YÖNETİM PANELİNE HOŞGELDİNİZ!  </h1>
+
+    <hr />
+</div>
+
+
+
+<div>
+
+
+    <div style="height:150px;width:250px;" class="col-md-3">
+        <div style="float:left;top:5px;color:White; text-align:center;" class="text-center">
+            <i class="fas fa-user-graduate" style="font-size:100px;opacity:0.4">  </i>
+            <h1 style=" font-size:30px;margin-top:-55px!important;margin-left:110px!important;position:absolute" class="text-center">@kursiyersayisi</h1>
+
+        </div>
+        <div style="padding-top:50%;display:block;height:25px;width:100%;color:white;background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);" class="text-center">
+            <h5 style="background-color:#004d7a;">KAYITLI KURSİYER SAYISI</h5>
+        </div>
+    </div>
+
+    <div style="height:150px;width:250px;"  class="col-md-3">
+        <div style="float:left;top:5px;color:White; text-align:center;" class="text-center">
+            <i class="fas fa-user" style="font-size:100px;opacity:0.4">  </i>
+            <h1 style=" font-size:30px;margin-top:-55px!important;margin-left:110px!important;position:absolute" class="text-center">@egitmensayisi</h1>
+
+        </div>
+        <div style="padding-top:50%;display:block;height:25px;width:100%;color:white;background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);" class="text-center">
+            <h5 style="background-color:#004d7a;">KAYITLI EĞİTMEN SAYISI</h5>
+        </div>
+    </div>
+
+    <div style="height:150px;width:250px;"  class="col-md-3">
+        <div style="float:left;top:5px;color:White; text-align:center;" class="text-center">
+            <i class="fas fa-user-graduate" style="font-size:100px;opacity:0.4">  </i>  
+            <h1 style=" font-size:30px;margin-top:-55px!important;margin-left:110px!important;position:absolute" class="text-center">@onkayitkisi</h1>
+
+        </div>
+        <div style="padding-top:50%;display:block;height:25px;width:100%;color:white;background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);" class="text-center">
+            <h5 style="background-color:#004d7a;">ÖN KAYITTAKİ KİŞİ SAYISI</h5>
+        </div>
+    </div>
+
+    <div style="height:150px;width:250px;"  class="col-md-3">
+        <div style="float:left;top:5px;color:White; text-align:center;" class="text-center">
+            <i class="fas fa-briefcase" style="font-size:100px;opacity:0.4">  </i>
+            <h1 style=" font-size:30px;margin-top:-55px!important;margin-left:110px!important;position:absolute" class="text-center">@totalpara</h1>
+
+        </div>
+        <div style="padding-top:50%;display:block;height:25px;width:100%;color:white;background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);" class="text-center">
+            <h5 style="background-color:#004d7a;">KASADAKİ PARA</h5>
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,57 @@
+﻿@{
+
+    int aktifsayfa = Convert.ToInt32(ViewData["aktifsayfa"]);
+    int toplamsatir = Convert.ToInt32(ViewData["toplamsatir"]);
+    int toplamsayfa = Convert.ToInt32(ViewData["toplamsayfa"]);
+
+    string controllername = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    string actionname = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+
+
+    if (toplamsatir == 0)
+    {
+        <div class="sayfalama">
+            <a class="btn btn-primary" href="/@controllername/@actionname"><i class="fas fa-angle-double-left"></i> İlk</a>
+            <a class="btn btn-primary" href="/@controllername/@actionname"><i class="fas fa-angle-left"></i> Geri</a>
+            <input type="text" value="0" />
+            <a class="btn btn-primary" href="/@controllername/@actionname"><i class="fas fa-angle-right"></i> İleri</a>
+            <a class="btn btn-primary" href="/@controllername/@actionname"><i class="fas fa-angle-double-right"></i> Son</a>
+        </div>
+    }
+
+    else
+    {
+        if (aktifsayfa == 0)
+        {
+            <div class="sayfalama">
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=0"><i class="fas fa-angle-double-left"></i> İlk</a>
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=0"><i class="fas fa-angle-left"></i> Geri</a>
+                <input type="text" value="@aktifsayfa" />
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=@(@aktifsayfa + 1)"><i class="fas fa-angle-right"></i> İleri</a>
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=@(@toplamsayfa-1)"><i class="fas fa-angle-double-right"></i> Son</a>
+            </div>
+        }
+
+        else if (aktifsayfa == toplamsayfa - 1)
+        {
+            <div class="sayfalama">
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=0"><i class="fas fa-angle-double-left"></i> İlk</a>
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=@(@aktifsayfa - 1)"><i class="fas fa-angle-left"></i> Geri</a>
+                <input type="text" value="@aktifsayfa" />
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=@(@toplamsayfa - 1)"><i class="fas fa-angle-right"></i> İleri</a>
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=@(@toplamsayfa - 1)"><i class="fas fa-angle-double-right"></i> Son</a>
+            </div>
+        }
+
+        else
+        {
+            <div class="sayfalama">
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=0"><i class="fas fa-angle-double-left"></i> İlk</a>
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=@(@aktifsayfa - 1)"><i class="fas fa-angle-left"></i> Geri</a>
+                <input type="text" value="@aktifsayfa" />
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=@(@aktifsayfa + 1)"><i class="fas fa-angle-right"></i> İleri</a>
+                <a class="btn btn-primary" href="/@controllername/@actionname?aktifsayfa=@(@toplamsayfa - 1)"><i class="fas fa-angle-double-right"></i> Son</a>
+            </div>
+        }
+    }
+}

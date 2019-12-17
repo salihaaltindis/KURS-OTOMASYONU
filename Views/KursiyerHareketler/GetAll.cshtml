@@ -1,0 +1,61 @@
+﻿@model IEnumerable<KURSOTOMASYON.Models.KURSIYER_HAREKET>
+
+<h1>KURSİYER HAREKETLERİ</h1>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KURSIYER_HAREKET_REFNO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KAYIT.KURSIYER.ADI_SOYADI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KAYIT.KAYIT_DURUMU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TARIH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BORC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODENEN)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KURSIYER_HAREKET_REFNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KAYIT.KURSIYER.ADI_SOYADI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KAYIT.KAYIT_DURUMU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TARIH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BORC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ODENEN)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#footer").hide();
+        $("#sidebarCollapse").hide();
+        $("#hesapyonet").hide();
+    });
+
+</script>

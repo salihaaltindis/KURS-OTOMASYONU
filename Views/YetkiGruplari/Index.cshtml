@@ -1,0 +1,38 @@
+﻿@model List<KURSOTOMASYON.Models.YETKI_GRUBU>
+
+@{
+    ViewBag.Title = "Yetki Grupları";
+}
+
+
+
+    
+
+       <div class="panel panel-default">
+           <div class="panel panel-body">
+               <table class="table table-hover">
+                   <tr>
+                       <th>
+                           Kullanıcı Grubu Adı
+                       </th>
+                       <th>
+                           Yetkiler
+                       </th>
+                   </tr>
+
+                   @foreach (var item in Model)
+                   {
+                       <tr>
+                           <td>
+                               @item.GRUP_ADI
+                           </td>
+                           <td>
+                               @Html.ActionLink("Yetkiler", "Yetkiler", new { id = item.YETKI_GRUBU_REFNO })
+                           </td>
+                       </tr>
+                   }
+
+               </table>
+           </div>
+       </div>
+        

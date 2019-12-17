@@ -1,0 +1,102 @@
+﻿
+@using KURSOTOMASYON.Models
+
+@model List<VW_KURSIYER_HAREKET_KAYIT_KURSIYER>
+@{
+    ViewBag.Title = "Index";
+    int kayıtrefno = 0;
+    if (ViewData["id"] != null)
+    {
+        kayıtrefno = Convert.ToInt32(ViewData["id"]);
+    }
+}
+
+
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+
+<div class="panel panel-default">
+    <div id="title">
+        KURSİYER HAREKET SAYFASI
+    </div>
+
+    <div class="panel panel-body">
+        <hr>
+        <div id="taksitodeme" class="row">
+
+            <form action="/KursiyerHareketler/HareketOlustur" method="post">
+                <input type="hidden" name="kayıtrefno" value="@kayıtrefno" />
+                <span>
+                    <a class="btn btn-dark" href="/Kursiyerler/Index">GERİ</a>
+                </span>
+            </form>
+        </div>
+
+
+        <div id="listeler" class="row table-responsive">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+
+                        <th scope="col">KURSİYER HAREKET REFNO</th>
+                        <th scope="col">KURSİYER ADI SOYADI</th>
+                        <th scope="col">KAYIT DURUMU</th>
+                        <th scope="col">TARİH</th>
+                        <th scope="col">BORÇ</th>
+                        <th scope="col">ÖDENEN</th>
+
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @{
+                            foreach (var k in Model)
+                            {
+
+                                var myModal = "myModal" + k.KURSIYER_HAREKET_REFNO;
+                            <tr class="@(k.BORC > k.ODENEN? "white" : k.BORC == k.ODENEN? "green":"blue")">
+                                <th>@k.KURSIYER_HAREKET_REFNO</th>
+                                <th>@k.ADI_SOYADI</th>
+                                <th>@k.KAYIT_DURUMU</th>
+                                <th>@k.TARIH</th>
+                                <th>@k.BORC</th>
+                                <th>@k.ODENEN</th>
+
+
+                                <th>
+                                    <a href="/KursiyerHareketler/Create/@k.KURSIYER_REFNO" class="btn btn-success"><i class="far fa-edit"></i> Düzenle</a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@myModal"
+                                            data-whatever="@k.KURSIYER_REFNO">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        Sil
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">İşlem Onay</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Silmek İstedğinize Emin misiniz?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <a href="/KursiyerHareketler/Delete/@k.KURSIYER_REFNO" class="btn btn-danger" onclick="ConfirmDelete(@k.KURSIYER_REFNO)">Sil</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

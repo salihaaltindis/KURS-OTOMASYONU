@@ -1,0 +1,88 @@
+﻿@using KURSOTOMASYON.Models;
+@model YONETICI
+
+
+@{
+    //controller dan gelen verileri kendi tiplerine dönüştürüyoruz.
+    List<YETKI_GRUBU> yetkigrubu = ViewData["yetkigrubu"] as List<YETKI_GRUBU>;
+}
+
+
+<style>
+    .input-validation-error {
+        border-color: red;
+    }
+</style>
+
+<div class="panel panel-default">
+    <div id="title">YÖNETİCİ EKLEME SAYFASI</div>
+    <div class="panel panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YONETICI_ADI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.YONETICI_ADI, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.YONETICI_ADI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PAROLA, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PAROLA, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PAROLA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DURUMU, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.DURUMU)
+                            @Html.ValidationMessageFor(model => model.DURUMU, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YETKI_GRUBU.GRUP_ADI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select name="YETKI_GRUBU_REFNO" id="YETKI_GRUBU_REFNO" class="form-control">
+                            @foreach (var k in yetkigrubu)
+                            {
+                                if (Model.YETKI_GRUBU_REFNO == k.YETKI_GRUBU_REFNO)
+                                {
+                                    <option selected value="@k.YETKI_GRUBU_REFNO">@k.GRUP_ADI</option>
+                                }
+                                else
+                                {
+                                    <option value="@k.YETKI_GRUBU_REFNO">@k.GRUP_ADI</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Kaydet" class="btn btn-success" />
+                        <a class="btn btn-info" href="/Yoneticiler/Index" role="button">Vazgeç</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

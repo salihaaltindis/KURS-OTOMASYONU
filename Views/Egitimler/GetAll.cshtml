@@ -1,0 +1,67 @@
+﻿@model IEnumerable<KURSOTOMASYON.Models.EGITIM>
+
+<h1>EGİTİMLER</h1>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EGITIM_REFNO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KATEGORI.KATEGORI_ADI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EGITIM_ADI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ICERIK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UCRET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SAAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DURUMU)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EGITIM_REFNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KATEGORI.KATEGORI_ADI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EGITIM_ADI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ICERIK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UCRET)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SAAT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DURUMU)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#footer").hide();
+        $("#sidebarCollapse").hide();
+        $("#hesapyonet").hide();
+    });
+
+</script>

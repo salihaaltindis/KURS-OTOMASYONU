@@ -1,0 +1,59 @@
+﻿@model IEnumerable<KURSOTOMASYON.Models.YOKLAMA>
+
+<h1>YOKLAMA LİSTESİ</h1>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.YOKLAMA_REFNO)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.KURSIYER.ADI_SOYADI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TARIH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DURUMU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACIKLAMA)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.EGITIM_GRUP_REFNO)
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KURSIYER.ADI_SOYADI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TARIH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DURUMU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ACIKLAMA)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.EGITIM_GRUP_REFNO)
+            </td>*@
+        </tr>
+    }
+
+</table>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#footer").hide();
+        $("#sidebarCollapse").hide();
+        $("#hesapyonet").hide();
+    });
+
+</script>

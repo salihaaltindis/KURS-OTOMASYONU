@@ -1,0 +1,104 @@
+﻿@model IEnumerable<KURSOTOMASYON.Models.EGITIM_GRUP>
+
+<h1>EĞİTİM GRUPLARI</h1>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EGITIM_GRUP_REFNO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EGITIM_GRUP_ADI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EGITIM.EGITIM_ADI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EGITMan.ADI_SOYADI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UCRET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BASLANGIC_TARIH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BITIS_TARIH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BASLANGIC_SAAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BITIS_SAAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KONTENJAN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GUNLER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOLULUK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AYRILAN)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EGITIM_GRUP_REFNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EGITIM_GRUP_ADI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EGITIM.EGITIM_ADI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EGITMan.ADI_SOYADI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UCRET)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BASLANGIC_TARIH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BITIS_TARIH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BASLANGIC_SAAT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BITIS_SAAT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KONTENJAN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GUNLER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOLULUK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AYRILAN)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#footer").hide();
+        $("#sidebarCollapse").hide();
+        $("#hesapyonet").hide();
+    });
+
+</script>

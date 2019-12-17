@@ -1,0 +1,86 @@
+﻿@model IEnumerable<KURSOTOMASYON.Models.EGITMan>
+
+<h1>EĞİTMENLER</h1>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EGITMEN_REFNO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADI_SOYADI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PAROLA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TELEFON)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADRES)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DURUM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UCRET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACIKLAMA)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EGITMEN_REFNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ADI_SOYADI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PAROLA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TELEFON)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMAIL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ADRES)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DURUM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UCRET)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ACIKLAMA)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#footer").hide();
+        $("#sidebarCollapse").hide();
+        $("#hesapyonet").hide();
+    });
+
+</script>

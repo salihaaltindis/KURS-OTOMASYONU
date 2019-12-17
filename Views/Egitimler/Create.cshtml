@@ -1,0 +1,121 @@
+﻿@using KURSOTOMASYON.Models;
+@model EGITIM
+
+@{
+    //controller dan gelen verileri kendi tiplerine dönüştürüyoruz.
+    List<KATEGORI> kategori = ViewData["kategori"] as List<KATEGORI>;
+}
+
+<style>
+    .input-validation-error {
+        border-color: red;
+    }
+</style>
+
+
+<div class="panel panel-default">
+    <div id="title">
+        EĞİTİM EKLEME/GÜNCELLEME SAYFASI
+    </div>
+    <div class="panel panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EGITIM_REFNO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EGITIM_REFNO, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.EGITIM_REFNO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EGITIM_ADI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EGITIM_ADI, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EGITIM_ADI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.KATEGORI.KATEGORI_ADI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select name="KATEGORI_REFNO" id="KATEGORI_REFNO" class="form-control">
+                            @foreach (var k in kategori)
+                            {
+                                if (Model.KATEGORI_REFNO == k.KATEGORI_REFNO)
+                                {
+                                    <option selected value="@k.KATEGORI_REFNO">@k.KATEGORI_ADI</option>
+                                }
+                                else
+                                {
+                                    <option value="@k.KATEGORI_REFNO">@k.KATEGORI_ADI</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ICERIK, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.ICERIK, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ICERIK, "", new { @class = "text-danger" })
+                        <script>
+                            var editor = CKEDITOR.replace('ICERIK');
+                            CKFinder.setupCKEditor(editor, '/ckfinder/');
+                        </script>
+                    </div>
+
+                </div>
+
+                <div class=" form-group">
+                    @Html.LabelFor(model => model.UCRET, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UCRET, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UCRET, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class=" form-group">
+                    @Html.LabelFor(model => model.SAAT, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SAAT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SAAT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="DURUMU">DURUMU</label>
+                    <div class="col-md-10">
+                        <select name="DURUMU" id="DURUMU" class="form-control">
+                            @if (Model.DURUMU == true)
+                            {
+                                <option selected value="true">Aktif</option>
+                                <option value="false">Pasif</option>
+                            }
+                            else
+                            {
+                                <option value="true">Aktif</option>
+                                <option selected value="false">Pasif</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Kaydet" class="btn btn-success" />
+                        <a class="btn btn-info" href="/Egitimler/Index" role="button">Vazgeç</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
